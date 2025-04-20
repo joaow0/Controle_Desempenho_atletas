@@ -1,0 +1,45 @@
+athlete_performance = {}
+
+statistics = []
+total_goals = 0
+while True:
+    athlete_performance['name'] = str(input('Athlete name: '))
+    athlete_performance['games_played'] = int(input(f'How many games did {athlete_performance["name"]} play: '))
+    goals = []
+    s = 0
+    for i in range(1, athlete_performance['games_played'] + 1):
+        g = int(input(f'Goals scored in game {i}: '))
+        goals.append(g)
+        s += g
+    athlete_performance['total'] = s
+    athlete_performance['goals'] = goals
+    statistics.append(athlete_performance.copy())
+        
+    continue_input = str(input('Do you want to continue? [Y/N] '))
+    if continue_input in 'Nn':
+        break
+
+print('-=' * 50)
+print(f"{'cod':>4} {'name':>5} {'goals':>15} {'total':>18}")
+print('-' * 50)
+
+for i, v in enumerate(statistics):
+    goals = len(v['goals'])
+    goals_list = ', '.join(map(str, v['goals']))
+    print(f'{i + 1:>3}  {v["name"]:>5} {goals_list:>15}{v["total"]:>17}')
+
+print('-' * 50)
+
+while True:
+    player_data = int(input('Show data of which player? [999 to stop] '))
+    if player_data == 999:
+         break
+    if player_data > len(statistics):
+         print('Invalid code, try again: ')
+    else:
+         print(f' -- PLAYER STATS --')
+    for k, v in enumerate(statistics):
+        if player_data == k + 1:
+            for index, value in enumerate(v['goals']):
+                print(f'In game {index + 1}, scored {value} goals')
+print('!COME BACK SOON!')
